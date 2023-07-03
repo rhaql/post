@@ -20,12 +20,9 @@ public class Post extends Timestamped {
     private Long id; // 게시물 끼리 구분하기 위함
     @Column(name = "title", nullable = false)
     private String title; // 제목
-    @Column(name = "username", nullable = false)
-    private String username; // 작성자명
-    @Column(name = "password", nullable = false)
-    private String password; //패스워드
     @Column(name = "contents", nullable = false)
     private String contents; // 내용
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -34,21 +31,13 @@ public class Post extends Timestamped {
 
     public Post(PostRequestDto postrequestDto) {
         this.title = postrequestDto.getTitle();
-        this.username = postrequestDto.getUsername();
-        this.password = postrequestDto.getPassword();
         this.contents = postrequestDto.getContents();
 
     }
 
     public void update(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
-        this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
     }
 
-    public void checkPassword(String inputPassword){
-        if (!password.equals(inputPassword)){
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
-    }
 }

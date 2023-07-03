@@ -27,7 +27,7 @@ public class PostService {
     }
 
 
-    @Deprecated
+
     public PostResponseDto createPost(PostRequestDto requestDto, User user) {
 
         // RequestDto -> Entity
@@ -55,8 +55,6 @@ public class PostService {
         // 해당 메모가 DB에 존재하는지 확인
         Post post = findPost(id);
         post.setUser (user);
-        // 비밀번호 체크
-        post.checkPassword(postrequestDto.getPassword());
         // post 내용 수정
         post.update(postrequestDto);
 
@@ -65,13 +63,10 @@ public class PostService {
     }
 
 
-    public Long deletePost(Long id, String passoword, User user) {
+    public Long deletePost(Long id, PostRequestDto postrequestDto, User user) {
         // 해당 메모가 DB에 존재하는지 확인
         Post post = findPost(id);
         post.setUser (user);
-        // 비밀번호 체크
-        post.checkPassword(passoword);
-
         // post 삭제
         postRepository.delete(post);
 

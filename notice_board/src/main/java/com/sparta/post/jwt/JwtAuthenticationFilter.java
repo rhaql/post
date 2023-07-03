@@ -48,6 +48,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String token = jwtUtil.createToken(username);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
+        log.info("로그인성공");
     }
 
     @Override
